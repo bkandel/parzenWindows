@@ -635,10 +635,12 @@ JointHistogramParzenShapeAndOrientationListSampleFunction<TListSample, TOutput, 
 	writer->Update();
 
 
+    typedef ImageFileWriter< JointHistogramImageType >  WriterType;
+	typename WriterType::Pointer      writer2 = WriterType::New();
 	std::string output2( "output_orientation.nii.gz" );
-	writer->SetFileName( output2.c_str() );
-	writer->SetInput(  this->m_JointHistogramImages[1] );
-	writer->Update();
+	writer2->SetFileName( output2.c_str() );
+	writer2->SetInput(  this->m_JointHistogramImages[1] );
+	writer2->Update();
 
 
   os << indent << "Sigma: " << this->m_Sigma << std::endl;
