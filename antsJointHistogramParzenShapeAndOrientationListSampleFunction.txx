@@ -568,6 +568,8 @@ JointHistogramParzenShapeAndOrientationListSampleFunction<TListSample, TOutput, 
     this->m_JointHistogramImages[d] = divider->GetOutput();
     }
     
+
+    
     
 }
 
@@ -606,21 +608,7 @@ JointHistogramParzenShapeAndOrientationListSampleFunction<TListSample, TOutput, 
     return 0;
     }
     
-    // Added by Ben
 
-    typedef ImageFileWriter< JointHistogramImageType >  WriterType;
-	typename WriterType::Pointer      writer = WriterType::New();
-	std::string output( "output_shape.nii.gz" );
-	writer->SetFileName( output.c_str() );
-	writer->SetInput(  m_JointHistogramImages[0] );
-	writer->Update();
-
-
-	std::string output2( "output_orientation.nii.gz" );
-	writer->SetFileName( output2.c_str() );
-	writer->SetInput(  m_JointHistogramImages[1] );
-	writer->Update();
-    
     
     
 }
@@ -635,6 +623,24 @@ JointHistogramParzenShapeAndOrientationListSampleFunction<TListSample, TOutput, 
   std::ostream& os,
   Indent indent) const
 {
+
+
+            // Added by Ben
+
+    typedef ImageFileWriter< JointHistogramImageType >  WriterType;
+	typename WriterType::Pointer      writer = WriterType::New();
+	std::string output( "output_shape.nii.gz" );
+	writer->SetFileName( output.c_str() );
+	writer->SetInput(  this->m_JointHistogramImages[0]);
+	writer->Update();
+
+
+	std::string output2( "output_orientation.nii.gz" );
+	writer->SetFileName( output2.c_str() );
+	writer->SetInput(  this->m_JointHistogramImages[1] );
+	writer->Update();
+
+
   os << indent << "Sigma: " << this->m_Sigma << std::endl;
   os << indent << "Number of histogram bins: "
     << this->m_NumberOfJointHistogramBins << std::endl;
