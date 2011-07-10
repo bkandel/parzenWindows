@@ -30,6 +30,7 @@
 #include "itkStatisticsImageFilter.h"
 #include "itkImageFileReader.h"
 #include "itkImageFileWriter.h"
+#include <sstream>
 
 namespace itk {
 namespace ants {
@@ -50,12 +51,15 @@ JointHistogramParzenShapeAndOrientationListSampleFunction<TListSample, TOutput, 
   this->m_JointHistogramImages[0] = NULL;
   this->m_JointHistogramImages[1] = NULL;
   this->m_JointHistogramImages[2] = NULL;
+  
 }
 
 template <class TListSample, class TOutput, class TCoordRep>
 JointHistogramParzenShapeAndOrientationListSampleFunction<TListSample, TOutput, TCoordRep>
 ::~JointHistogramParzenShapeAndOrientationListSampleFunction()
 {
+
+
 }
 
 
@@ -184,6 +188,7 @@ JointHistogramParzenShapeAndOrientationListSampleFunction<TListSample, TOutput, 
         ( 1.0 - distance4) * newWeight + oldWeight );
       }
      }
+
   return;
 }
 
@@ -567,9 +572,32 @@ JointHistogramParzenShapeAndOrientationListSampleFunction<TListSample, TOutput, 
     divider->Update();
     this->m_JointHistogramImages[d] = divider->GetOutput();
     }
-    
 
+	// Define static variable which_class and convert to string
+	
+	static int which_class=0;
+	which_class++;
+	std::string string;
+	std::stringstream outstring;
+	outstring<<which_class;
+	string=outstring.str();
+	
+  	// Imagewriter 
+    typedef ImageFileWriter< JointHistogramImageType >  WriterType;
+	typename WriterType::Pointer      writer = WriterType::New();
+	
+	std::string output( "output_shape"+string+".nii.gz" );
+	writer->SetFileName( output.c_str() );
+	writer->SetInput(this->m_JointHistogramImages[0] );
+	writer->Update();
     
+	typedef ImageFileWriter< JointHistogramImageType >  WriterType2;
+	typename WriterType2::Pointer      writer2 = WriterType::New();
+	std::string output2( "output_orientation"+string+".nii.gz" );
+	writer2->SetFileName( output2.c_str() );
+	writer2->SetInput(this->m_JointHistogramImages[1] );
+	writer2->Update();
+  
     
 }
 
@@ -623,26 +651,6 @@ JointHistogramParzenShapeAndOrientationListSampleFunction<TListSample, TOutput, 
   std::ostream& os,
   Indent indent) const
 {
-
-
-            // Added by Ben
-
-    typedef ImageFileWriter< JointHistogramImageType >  WriterType;
-	typename WriterType::Pointer      writer = WriterType::New();
-	std::string output( "output_shape.nii.gz" );
-	writer->SetFileName( output.c_str() );
-	writer->SetInput(  this->m_JointHistogramImages[0]);
-	writer->Update();
-
-
-    typedef ImageFileWriter< JointHistogramImageType >  WriterType;
-	typename WriterType::Pointer      writer2 = WriterType::New();
-	std::string output2( "output_orientation.nii.gz" );
-	writer2->SetFileName( output2.c_str() );
-	writer2->SetInput(  this->m_JointHistogramImages[1] );
-	writer2->Update();
-
-
   os << indent << "Sigma: " << this->m_Sigma << std::endl;
   os << indent << "Number of histogram bins: "
     << this->m_NumberOfJointHistogramBins << std::endl;
