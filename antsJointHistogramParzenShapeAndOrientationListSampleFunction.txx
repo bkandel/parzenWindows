@@ -31,6 +31,8 @@
 #include "itkImageFileReader.h"
 #include "itkImageFileWriter.h"
 #include <sstream>
+#include <fstream>
+#include <iostream>
 
 namespace itk {
 namespace ants {
@@ -451,9 +453,17 @@ JointHistogramParzenShapeAndOrientationListSampleFunction<TListSample, TOutput, 
   unsigned int D = static_cast<unsigned int>( 0.5 * ( -1 + vcl_sqrt( 1.0 +
     8.0 * L ) ) );
 
+
+  //zpf
+  int index = 0;
+  
   It = this->GetInputListSample()->Begin();
   while( It != this->GetInputListSample()->End() )
     {
+	
+	//zpf
+	index++;
+	
     InputMeasurementVectorType inputMeasurement = It.GetMeasurementVector();
     // convert to a tensor then get its shape and primary orientation vector
     typedef VariableSizeMatrix<RealType>                      TensorType;
@@ -500,8 +510,17 @@ JointHistogramParzenShapeAndOrientationListSampleFunction<TListSample, TOutput, 
     }
 
   It = this->GetInputListSample()->Begin();
+	
+    	
+	
+	//zpf
+	Array<RealType> Shape1(index);
+	Array<RealType> Shape2(index);
+	int index2=0;
+	
   while( It != this->GetInputListSample()->End() )
     {
+	
     InputMeasurementVectorType inputMeasurement = It.GetMeasurementVector();
     // convert to a tensor then get its shape and primary orientation vector
     typedef VariableSizeMatrix<RealType>                      TensorType;
@@ -520,23 +539,35 @@ JointHistogramParzenShapeAndOrientationListSampleFunction<TListSample, TOutput, 
     TensorType V;
     TensorType W;
     TensorType Tc = T;
+	
+	
     typedef DecomposeTensorFunction<TensorType> DecomposerType;
     typename DecomposerType::Pointer decomposer = DecomposerType::New();
     decomposer->EvaluateSymmetricEigenDecomposition( Tc, W, V );
     // now W holds the eigenvalues ( shape )
-
     // for each tensor sample, we add its content to the relevant histogram.
     RealType eigenvalue1 = W(2, 2) - this->m_MinimumEigenvalue1;
     RealType eigenvalue2 = ( W(1, 1) + W(0, 0) ) * 0.5 -
       this->m_MinimumEigenvalue2;
+	
+	//zpf
+	Shape1[index2]=W(2,2);
+	Shape2[index2]=W(1,1);  
+	  
     eigenvalue1 /= ( this->m_MaximumEigenvalue1 - this->m_MinimumEigenvalue1 );
     eigenvalue2 /= ( this->m_MaximumEigenvalue2 - this->m_MinimumEigenvalue2 );
+	
+
+	
+	
     /** joint-hist model for the eigenvalues */
     this->IncrementJointHistogramForShape( eigenvalue1,eigenvalue2 );
 
     RealType x = V(2, 0);
     RealType y = V(2, 1);
     RealType z = V(2, 2);
+	
+	
     /** joint-hist model for the principal eigenvector */
     this->IncrementJointHistogramForOrientation( x, y, z, 1 );
     x = V(1, 0);
@@ -546,7 +577,42 @@ JointHistogramParzenShapeAndOrientationListSampleFunction<TListSample, TOutput, 
     this->IncrementJointHistogramForOrientation( x, y, z, 2 );
 
     ++It;
+	
+	//zpf
+	++index2;
     }
+	
+    // Define static variable which_class and convert to string
+	
+	static int which_class=0;
+	which_class++;
+	std::string string;
+	std::stringstream outstring;
+	outstring<<which_class;
+	string=outstring.str();
+	
+	//zpf
+	
+	
+	std::ofstream outfile;
+	std::string namea("shapea"+string+".txt");
+	outfile.open(namea.c_str());
+	for (int i=0; i<index; i++)
+	  {
+	  outfile<<Shape1[i]<<"\n";
+	  }
+	outfile.close();
+	
+	std::ofstream outfile2;
+	std::string nameb("shapeb"+string+".txt");
+	outfile2.open(nameb.c_str());
+	for (int i=0; i<index; i++)
+	   {
+	   outfile2<<Shape2[i]<<"\n";
+	   }
+	outfile2.close();
+
+	
 
   for( unsigned int d = 0; d < 3; d++ )
     {
@@ -573,14 +639,7 @@ JointHistogramParzenShapeAndOrientationListSampleFunction<TListSample, TOutput, 
     this->m_JointHistogramImages[d] = divider->GetOutput();
     }
 
-	// Define static variable which_class and convert to string
-	
-	static int which_class=0;
-	which_class++;
-	std::string string;
-	std::stringstream outstring;
-	outstring<<which_class;
-	string=outstring.str();
+
 	
   	// Imagewriter 
     typedef ImageFileWriter< JointHistogramImageType >  WriterType;
