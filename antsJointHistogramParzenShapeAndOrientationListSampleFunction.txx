@@ -582,6 +582,7 @@ JointHistogramParzenShapeAndOrientationListSampleFunction<TListSample, TOutput, 
 	outstring<<which_class;
 	string=outstring.str();
 	
+	std::cout << "Before Histogram 1" << std::endl; 
   	// Imagewriter 
     typedef ImageFileWriter< JointHistogramImageType >  WriterType;
 	typename WriterType::Pointer      writer = WriterType::New();
@@ -590,6 +591,7 @@ JointHistogramParzenShapeAndOrientationListSampleFunction<TListSample, TOutput, 
 	writer->SetFileName( output.c_str() );
 	writer->SetInput(this->m_JointHistogramImages[0] );
 	writer->Update();
+	std::cout << "Before Histogram 2" << std::endl;
     
 	typedef ImageFileWriter< JointHistogramImageType >  WriterType2;
 	typename WriterType2::Pointer      writer2 = WriterType::New();

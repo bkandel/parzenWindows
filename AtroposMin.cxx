@@ -24,11 +24,7 @@ int AtroposSegmentation( itk::ants::CommandLineParser *parser )
   typedef float PixelType;
   typedef float RealType;
   typedef itk::Image<PixelType, ImageDimension>  InputImageType;
-  
-  //Added by Ben--make a joint histogram image. 
-  typedef itk::Image<PixelType, ImageDimension>  JointHistogramImage;
-  
-  
+
   typedef unsigned int LabelType;
   typedef itk::Image<LabelType, ImageDimension> LabelImageType;
 
@@ -115,6 +111,8 @@ int AtroposSegmentation( itk::ants::CommandLineParser *parser )
     ConvertToLowerCase( likelihoodModel );
     if( !likelihoodModel.compare( std::string( "jointshapeandorientationprobability" ) ) )
       {
+  	  std::cout << "The likelihood option is defined as jointshapeandorientationprobability." << std::endl;
+
       if( segmenter->GetNumberOfIntensityImages() !=
         static_cast<unsigned int>( ImageDimension * ( ImageDimension + 1 ) / 2 ) )
         {
@@ -155,19 +153,38 @@ int AtroposSegmentation( itk::ants::CommandLineParser *parser )
       std::cerr << "Unrecognized likelihood model request." << std::endl;
       return EXIT_FAILURE;
       }
+    
+    try
+      {
+      std::cout << std::endl << "Progress: " << std::endl;
+
+  //    segmenter->DebugOn();
+      segmenter->Update();
+      
+      std::cout << "Segmenter successfully updated." << std::endl; 
+
+
+      }
+    catch( itk::ExceptionObject exp )
+      {
+      std::cerr << exp << std::endl;
+      return EXIT_FAILURE;
+      }
+
+    
     }
 
-  //std::cout << std::endl << "Writing output:" << std::endl;
-  //typename itk::ants::CommandLineParser::OptionType::Pointer outputOption =
-    //parser->GetOption( "output" );
-  //if( outputOption && outputOption->GetNumberOfValues() > 0 )
-    //{
-    //typedef  itk::ImageFileWriter<JointHistogramImage> WriterType; //Edited by Ben--changed ImageType to JointHistogramImage
-    //typename WriterType::Pointer writer = WriterType::New();
-    //writer->SetInput( m_JointHistogramImages ); // Also edited by Ben
-    //writer->SetFileName( ( outputOption->GetValue() ).c_str() );
-    //writer->Update();
-    //}
+//  std::cout << std::endl << "Writing output:" << std::endl;
+//  typename itk::ants::CommandLineParser::OptionType::Pointer outputOption =
+//    parser->GetOption( "output" );
+//  if( outputOption && outputOption->GetNumberOfValues() > 0 )
+//    {
+//    typedef  itk::ImageFileWriter<ImageType> WriterType;
+//    typename WriterType::Pointer writer = WriterType::New();
+//    writer->SetInput( segmenter->GetOutput() );
+//    writer->SetFileName( ( outputOption->GetValue() ).c_str() );
+//    writer->Update();
+//    }
 
   std::cout << std::endl;
   segmenter->Print( std::cout, 2 );
