@@ -7,7 +7,8 @@ exit
 fi 
 if [ ${#ANTSPATH} -le 3 ] ; then 
   echo we guess at your ants path 
-  export ANTSPATH=${ANTSPATH:="$HOME/ants-build/"} # EDIT THIS 
+  export ANTSPATH=${ANTSPATH:="$HOME/ANTS-test/ants-build-test"} # EDIT THIS
+  echo We guessed that your ANTS path is: $ANTSPATH 
 fi 
 if [ ! -s ${ANTSPATH}/ANTS ] ; then 
   echo we cant find the ANTS program -- does not seem to exist.  please \(re\)define \$ANTSPATH in your environment.
@@ -45,7 +46,7 @@ elif [ $SegType == "Tensor" ] ; then
     ${ANTSPATH}/ImageMath 3 v${x}.nii.gz ExtractVectorComponent $DT $x 
   done
   IMGS=" -a v0.nii.gz -a v1.nii.gz  -a v2.nii.gz -a v3.nii.gz  -a v4.nii.gz -a v5.nii.gz "
-  ${ANTSPATH}/Atropos -d 3 -i PriorLabelImage[${NC},${Init},0.0] -x $mask -o ${Out}.nii.gz $IMGS -c [4,0]  -p Plato[0] -m [0.4,1x1x1]  -k HistogramParzenWindows[1,16]
+  ${ANTSPATH}/Atropos -d 3 -i PriorLabelImage[${NC},${Init},0.0] -x $mask -o ${Out}.nii.gz $IMGS -c [4,0]  -p Plato[0] -m [0.4,1x1x1]  -k jointshapeandorientationprobability[1,50]
   for x in 0 1 2 3 4 5 ; do 
    rm v${x}.nii.gz
   done
