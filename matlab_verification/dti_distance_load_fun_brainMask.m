@@ -43,16 +43,16 @@ fileNames = fileNameCell;
 [cc7EigVectors, cc7EigValues, cc7TensorMat] = dti_load('atlas_construction\adult_template\final_seg\tsa\cc_7\cc_binary.nii',...
     'home\cbrun\TSA\atlas_construction\adult_template\mean_diffeomorphic_initial6.nii');
 %}
-h = waitbar(0, 'Loading DTI Data'); 
+%h = p(0, 'Loading DTI Data'); 
 for i = 1:10
     [eigVectors{i}, eigValues{i}, Tensor{i}] = dti_load_brainMask(fileNames{i+1}, ...
         fileNames{1}); 
-    waitbar(i/20)
+    progressbar([], i/20)
 end
 for i = 11:20
      [eigVectors{i}, eigValues{i}, Tensor{i}] = dti_load_brainMask(fileNames{i+2}, ...
         fileNames{12}); 
-    waitbar(i/20)
+    waitbar([], i/20)
 end
 
 Names{1} = 'Left CST';

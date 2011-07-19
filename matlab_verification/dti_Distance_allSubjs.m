@@ -12,11 +12,11 @@ subjName{1} = 'subj_113';
 % folderNames{3} = 'kirby\subj_142'; 
 % subjName{3} = 'subj_142'; 
 
-h = waitbar(0, 'Subject Progress'); 
+progressbar('Subject Progress', 'Loading DTI Data'); 
 tic
 for i = 1:length(folderNames)
     dti_distance(folderNames{i}, subjName{i}); 
-    waitbar(i / length(folderNames)); 
+    progressbar(i / length(folderNames), []); 
 end
 toc
 close(h)
