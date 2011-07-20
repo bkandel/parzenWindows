@@ -52,7 +52,7 @@ end
 for i = 11:20
      [eigVectors{i}, eigValues{i}, Tensor{i}] = dti_load_brainMask(fileNames{i+2}, ...
         fileNames{12}); 
-    waitbar([], i/20)
+    progressbar([], i/20)
 end
 
 Names{1} = 'Left CST';
@@ -78,9 +78,8 @@ Names{19} = 'Right SLF';
 Names{20} = 'Right Uncinate';
 
 
-newDir = ['..' filesep '..'];
+newDir = ['~/code/parzenWindows/matlab_verification'];
 cd(newDir)
 
-close(h)
 
 

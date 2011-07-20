@@ -12,11 +12,10 @@ subjName{1} = 'subj_113';
 % folderNames{3} = 'kirby\subj_142'; 
 % subjName{3} = 'subj_142'; 
 
-progressbar('Subject Progress', 'Loading DTI Data'); 
+progressbar('Subject Progress', 'Loading DTI Data', 'Probability Calculations'); 
 tic
 for i = 1:length(folderNames)
-    dti_distance(folderNames{i}, subjName{i}); 
-    progressbar(i / length(folderNames), []); 
+    dti_distance_presetSigma(folderNames{i}, subjName{i}, 3); 
+    progressbar(i / length(folderNames), [], []); 
 end
 toc
-close(h)

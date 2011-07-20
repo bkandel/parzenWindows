@@ -36,7 +36,8 @@ for i = 1:length(angles)
     anglePdfLog{i} = log(density); 
 end
 
-
+%{
+figure(2); 
  for i = 1:10
      subplot(2,5,i);
      mesh(gridx1, gridx2, nonPara{i}); 
@@ -44,7 +45,7 @@ end
      xlabel('\psi'); 
      ylabel('\theta');
  end
-
+%}
 for i = 1:20
     angle1bin{i} = angles{i}(:,1); 
     angle1bin{i} = angle1bin{i} * numBins / 180; 
@@ -58,7 +59,7 @@ for i = 1:20
 end
 
 %% Do same for lambda
-%{
+
 minXY = [0 0]; 
 maxXY = [1 1];
 numBins = 2^5; 
@@ -105,9 +106,10 @@ for i = 1:20
     lambda2bin{i} = lambda2bin{i}+1; 
 
 end
-%}
+
 
 %%
+figure; 
 
    progressbar('Calculating Mean Probabilities for Subject 1'); 
 
@@ -135,7 +137,7 @@ for i = 1:10
     progressbar(i/10)
 end
  
-meanProbAngleLog{1} = abs(meanProbAngleLog{1})
+meanProbAngleLog{1} = abs(meanProbAngleLog{1});
 meanDiag = diag(meanProbAngleLog{1}); 
 maxMean = min(meanProbAngleLog{1}'); 
 missesMean = meanDiag ~= maxMean'; 

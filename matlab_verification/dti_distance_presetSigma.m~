@@ -46,8 +46,6 @@ for i = 1:length(angles)
     % Convert histogram to population density f'n
     totalNum = sum(sum(histmat(:, :, i))); 
     pdfmat(:, :, i) = histmat(:, :, i) / totalNum; 
-    % Convolve with Gaussian filter for Parzen windowing
-    pdfmat(:, :, i) = conv2(pdfmat(:, :, i), gaussFilter, 'same'); 
     anglePdf{i} = pdfmat(:, :, i);
     anglePdfLog{i} = log(pdfmat(:, :, i)); 
 end
@@ -61,7 +59,6 @@ end
 %     ylabel('\theta');
 % end
 
-%{
 for i = 1:20
     angle1bin{i} = angles{i}(:,1); 
     angle1bin{i} = angle1bin{i} * numBins / 180; 
@@ -73,7 +70,6 @@ for i = 1:20
     angle2bin{i} = floor(angle2bin{i}); 
     angle2bin{i} = angle2bin{i} + numBins/2+1; 
 end
-%}
 
 %% Do same for lambda
 %{
@@ -127,6 +123,7 @@ end
 
 %%
 
+   progressbar('Calculating Mean Probabilities for Subject 1'); 
 
 for i = 1:10
     for j = 1:10
@@ -149,7 +146,7 @@ for i = 1:10
 
 %         meanProb(i,j) = mean(probability{i,j}); 
     end
-    progressbar([], [], i/10)
+    progressbar(i/10)
 end
  
 meanProbAngleLog{1} = abs(meanProbAngleLog{1})
