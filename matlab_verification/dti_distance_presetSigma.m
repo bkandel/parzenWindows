@@ -61,7 +61,7 @@ end
 %     ylabel('\theta');
 % end
 
-%{
+
 for i = 1:20
     angle1bin{i} = angles{i}(:,1); 
     angle1bin{i} = angle1bin{i} * numBins / 180; 
@@ -73,7 +73,7 @@ for i = 1:20
     angle2bin{i} = floor(angle2bin{i}); 
     angle2bin{i} = angle2bin{i} + numBins/2+1; 
 end
-%}
+
 
 %% Do same for lambda
 %{
@@ -167,7 +167,7 @@ sum(missesMean)
 % sum(missesMed)
 
 %xlswrite('distanceCompare.xls',meanProb,'totalNonPara'); 
-progressbar('Calculating Mean Probabilities for Subject 2'); 
+%progressbar('Calculating Mean Probabilities for Subject 2'); 
 
 for i = 11:20
     for j = 11:20
@@ -190,7 +190,7 @@ for i = 11:20
 
 %         meanProb(i,j) = mean(probability{i,j}); 
     end
-    progressbar((i-10)/10)
+    progressbar([], [], (i-10)/10)
 end
 meanProbAngleLog{2} = abs(meanProbAngleLog{2})
 meanDiag = diag(meanProbAngleLog{2}); 
@@ -258,6 +258,7 @@ minMahal = min(distMahal{1}');
 missesMahal = mahalDiag ~= minMahal'; 
 sum(missesMahal)
 
+%{
  progressbar('Computing MCD Norm, Subject 1'); 
 for i = 1:10
     for j = 1:10 
@@ -269,7 +270,7 @@ mcdDiag = diag(distMCD{1});
 minMCD = min(distMCD{1}'); 
 missesMCD = mcdDiag ~= minMCD'; 
 sum(missesMCD)
-
+%}
 for i = 11:20
     for j = 11:20
         distMahal{2}(i-10,j-10) = mean(mahal(Tensor{i},Tensor{j})); 
@@ -282,7 +283,7 @@ mahalDiag = diag(distMahal{2});
 minMahal = min(distMahal{2}'); 
 missesMahal = mahalDiag ~= minMahal'; 
 sum(missesMahal)
-
+%{
 progressbar('Computing MCD Norm, Subject 2'); 
 
 for i = 11:20
@@ -295,7 +296,7 @@ mcdDiag = diag(distMCD{2});
 minMCD = min(distMCD{2}'); 
 missesMCD = mcdDiag ~= minMCD'; 
 sum(missesMCD)
-
+%}
 
 %{
 xlswrite('distanceCompare.xls',distMahal,'totalMahal'); 
@@ -307,8 +308,8 @@ xlswrite(subj, meanProbAngleLog{1},'meanProbAngleLog1');
 xlswrite(subj, meanProbAngleLog{2}, 'meanProbAngleLog2'); 
 xlswrite(subj, distMahal{1}, 'distMahal1'); 
 xlswrite(subj, distMahal{2}, 'distMahal2'); 
-xlswrite(subj, distMCD{1}, 'distMCD1'); 
-xlswrite(subj, distMCD{2}, 'distMCD2'); 
+%xlswrite(subj, distMCD{1}, 'distMCD1'); 
+%xlswrite(subj, distMCD{2}, 'distMCD2'); 
 
 %{
 lCst2Ilf = mahal(left_cst_TensorMat, left_ilf_TensorMat);
