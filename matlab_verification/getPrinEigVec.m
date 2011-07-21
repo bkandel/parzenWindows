@@ -7,10 +7,12 @@ for i = 1:length(eigVectors)
         prinVec = eigVectors{i}{j} * principal;
         
         % Only allow eigenvectors within one quadrant %added in for c
-
+        % Taken out to compare directly to Atropos. 
+        %{
         if prinVec(1)<0
             prinVec(1) = -prinVec(1);
         end
+        %}
         
         prinEigVector{i}{j} =  prinVec; 
     end
