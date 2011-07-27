@@ -29,8 +29,8 @@ prinEigVector = getPrinEigVec(eigVectors, eigValues);
 % defined as angle from horizontal (x-axis). 
 % Phi (vertical angle) ranges from 0 to pi, theta
 % from 0 to 2 * pi. 
-minXY = [0 0]; 
-maxXY = [pi 2*pi];
+minXY = [-pi/2 0]; 
+maxXY = [pi/2 pi];
 
 numBins = numBins; 
 

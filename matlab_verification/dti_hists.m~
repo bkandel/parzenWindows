@@ -29,7 +29,7 @@ prinEigVector = getPrinEigVec(eigVectors, eigValues);
 % defined as angle from horizontal (x-axis). 
 % Phi (vertical angle) ranges from 0 to pi, theta
 % from 0 to 2 * pi. 
-minXY = [0 0]; 
+minXY = [-pi/2 0]; 
 maxXY = [pi 2*pi];
 
 numBins = numBins; 
@@ -53,6 +53,8 @@ for i = 1:length(angles)
     pdfmat(:, :, i) = conv2(pdfmat(:, :, i), gaussFilter, 'same'); 
     anglePdf{i} = pdfmat(:, :, i);
     anglePdfLog{i} = log(pdfmat(:, :, i)); 
+    csvwrite(strcat('pdf_', num2str(i), '.csv'), pdfmat(:, :, i)); 
+    csvwrite(strcat('hist_', num2str(i), '.csv'), histmat(:, :, i)); 
 end
 
 

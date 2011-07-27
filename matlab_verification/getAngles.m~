@@ -1,15 +1,51 @@
-function [angles, lambda] = getAngles(eigVectors, prinEigVector)
+function [angles, lambda] = getAngles(eigValues, prinEigVector)
 
-for i = 1:length(eigVectors)
-    for j = 1:length(eigVectors{i})
-        angles{i}(j,1) = atand(prinEigVector{i}{j}(2) / ...
-            prinEigVector{i}{j}(1)); % theta(horizontal)
-        angles{i}(j,2) = asind(prinEigVector{i}{j}(3)); %  phi\ ...
+for i = 1:length(eigValues)
+    for j = 1:length(eigValues{i})
+        z=prinEigVector{i}{j}(3);
+        y=prinEigVector{i}{j}(2);
+        x=prinEigVector{i}{j}(1);
         
-        prinEigVectorSort = sort(abs(prinEigVector{i}{j}),'descend'); 
+        angles{i}(j,1) = acos(z); % \ ...
+        
+        if(abs(x)+abs(y)<10^-9)
+            angles{i}(j,2)=0;
+        else
+            if (y==0)
+                if (x>0)
+                    angles{i}(j,2)=0;
+                else
+                    angles{i}(j,2)=pi;
+                end
+            elseif (x==0)
+                    if (y>0)
+                        angles{i}(j,2)=pi/2;
+                    else
+                        angles{i}(j,2)= -pi / 2;
+                    end
+                
+            elseif (x>0&&y>0)
+                    angles{i}(j,2)=atan(y/x);
+                
+                    
+             % These next two should never happen--
+             % we flip the vector if x is less than 0. 
+            elseif (x<0&&y>0) 
+                    angles{i}(j,2)=pi+atan(y/x);
+                
+            elseif (x<0&&y<0)
+                    angles{i}(j,2)=pi+atan(y/x);
+                
+            else
+                    angles{i}(j,2)= atan(y/x);
+            end
+        end
+
+        
+        prinEigVectorSort = sort(abs(eigValues{i}{j}),'descend'); 
         
         lambda{i}(j,1) = prinEigVectorSort(1); 
-        lambda{i}(j,2) = prinEigVectorSort(2); 
+        lambda{i}(j,2) = prinEigVectorSort(4); 
     end
     %Get only one quadrant of the sphere:  When x is greater than 0, and z
     %is greater than zero.  This will give phi ranging from -phi\2 to

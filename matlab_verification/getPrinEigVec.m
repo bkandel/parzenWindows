@@ -8,6 +8,8 @@ for i = 1:length(eigVectors)
         
         % Only allow eigenvectors within one quadrant %added in for c
         % Taken out to compare directly to Atropos. 
+        % If the x component is negative, we flip the 
+        % entire vector about the origin. 
         
         if prinVec(1)<0
             prinVec = -prinVec;

@@ -21,20 +21,23 @@ for i = 1:length(eigValues)
                     if (y>0)
                         angles{i}(j,2)=pi/2;
                     else
-                        angles{i}(j,2)=1.5*pi;
+                        angles{i}(j,2)= -pi / 2;
                     end
                 
             elseif (x>0&&y>0)
                     angles{i}(j,2)=atan(y/x);
                 
-            elseif (x<0&&y>0)
+                    
+             % These next two should never happen--
+             % we flip the vector if x is less than 0. 
+            elseif (x<0&&y>0) 
                     angles{i}(j,2)=pi+atan(y/x);
                 
             elseif (x<0&&y<0)
                     angles{i}(j,2)=pi+atan(y/x);
                 
             else
-                    angles{i}(j,2)=2*pi+atan(y/x);
+                    angles{i}(j,2)= atan(y/x);
             end
         end
 
