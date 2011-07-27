@@ -6,12 +6,10 @@ for i = 1:length(eigVectors)
         principal = sum(principal)'; 
         prinVec = eigVectors{i}{j} * principal;
         
-        % Only allow eigenvectors within one quadrant %added in for c
-        % Taken out to compare directly to Atropos. 
-        % If the x component is negative, we flip the 
-        % entire vector about the origin. 
+%         Only allow eigenvectors within one quadrant %added in for c
+%         Taken out to compare directly to Atropos. 
         
-        if prinVec(1)<0
+        if (prinVec(1)<0)
             prinVec = -prinVec;
         end
         

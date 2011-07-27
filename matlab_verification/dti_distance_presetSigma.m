@@ -26,10 +26,10 @@ prinEigVector = getPrinEigVec(eigVectors, eigValues);
 
 
 % Compute nonparametric population density function using kde2d. 
-minXY = [-90 -90]; 
-maxXY = [90 90];
+minXY = [0 0]; 
+maxXY = [pi pi];
 
-numBins = 2^7; 
+numBins = numBins; 
 
 % Define 2-D Gaussian filter for convolution
 gaussFilter = fspecial('gaussian', (sigma * 6 + 1), sigma); 
@@ -42,7 +42,8 @@ histmat = zeros(numBins, numBins, length(angles));
 pdfmat = zeros(numBins, numBins, length(angles));
 
 for i = 1:length(angles)
-    histmat(:, :, i) = hist2(angles{i}(:,1), angles{i}(:,2), xedges, yedges); 
+    temp=angles{i}(:,2)+pi/2;
+    histmat(:, :, i) = hist2(angles{i}(:,1), temp, xedges, yedges); 
     % Convert histogram to population density f'n
     totalNum = sum(sum(histmat(:, :, i))); 
     pdfmat(:, :, i) = histmat(:, :, i) / totalNum; 
@@ -50,7 +51,9 @@ for i = 1:length(angles)
     pdfmat(:, :, i) = conv2(pdfmat(:, :, i), gaussFilter, 'same'); 
     anglePdf{i} = pdfmat(:, :, i);
     anglePdfLog{i} = log(pdfmat(:, :, i)); 
+    csvwrite(strcat('hist_', num2str(i), '.csv'), pdfmat(:, :, i)); 
 end
+
 
 
 % for i = 1:10

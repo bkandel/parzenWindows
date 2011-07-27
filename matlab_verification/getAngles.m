@@ -21,31 +21,28 @@ for i = 1:length(eigValues)
                     if (y>0)
                         angles{i}(j,2)=pi/2;
                     else
-                        angles{i}(j,2)= -pi / 2;
+                        angles{i}(j,2)=-pi/2;
                     end
                 
             elseif (x>0&&y>0)
                     angles{i}(j,2)=atan(y/x);
                 
-                    
-             % These next two should never happen--
-             % we flip the vector if x is less than 0. 
-            elseif (x<0&&y>0) 
+            elseif (x<0&&y>0)
                     angles{i}(j,2)=pi+atan(y/x);
                 
             elseif (x<0&&y<0)
                     angles{i}(j,2)=pi+atan(y/x);
                 
             else
-                    angles{i}(j,2)= atan(y/x);
+                    angles{i}(j,2)=atan(y/x);
             end
         end
 
         
-        prinEigVectorSort = sort(abs(eigValues{i}{j}),'descend'); 
+        prinEigVectorSort = eigValues{i}{j}; 
         
-        lambda{i}(j,1) = prinEigVectorSort(1); 
-        lambda{i}(j,2) = prinEigVectorSort(4); 
+        lambda{i}(j,1) = prinEigVectorSort(5); 
+        lambda{i}(j,2) = prinEigVectorSort(9); 
     end
     %Get only one quadrant of the sphere:  When x is greater than 0, and z
     %is greater than zero.  This will give phi ranging from -phi\2 to
