@@ -53,7 +53,8 @@ for i = 1:length(angles)
     pdfmat(:, :, i) = conv2(pdfmat(:, :, i), gaussFilter, 'same'); 
     anglePdf{i} = pdfmat(:, :, i);
     anglePdfLog{i} = log(pdfmat(:, :, i)); 
-    csvwrite(strcat('hist_', num2str(i), '.csv'), pdfmat(:, :, i)); 
+    csvwrite(strcat('pdf_', num2str(i), '.csv'), pdfmat(:, :, i)); 
+    csvwrite(strcat('hist_', num2str(i), '.csv'), histmat(:, :, i)); 
 end
 
 

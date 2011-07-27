@@ -5,8 +5,8 @@ clear; close all; clc
 
 folderNames{1} = '~/Dropbox/MVSEG/dti_distance_project/kirby/subj_113'; 
 subjName{1} = 'subj_113';
-sigma = 3; 
-numBins = 2^7; 
+sigma = 1; 
+numBins = 64; 
 
 % folderNames{2} = 'kirby\subj_127'; 
 % subjName{2} = 'subj_127';
