@@ -1,0 +1,45 @@
+This is BibTeX, Version 0.99c (TeX Live 2009/Debian)
+The top-level auxiliary file: DTI_MVSEG.aux
+The style file: plain.bst
+Database file #1: dti_mvseg.bib
+You've used 6 entries,
+            2118 wiz_defined-function locations,
+            545 strings with 5745 characters,
+and the built_in function-call counts, 2875 in all, are:
+= -- 280
+> -- 172
+< -- 0
++ -- 68
+- -- 62
+* -- 271
+:= -- 489
+add.period$ -- 24
+call.type$ -- 6
+change.case$ -- 49
+chr.to.int$ -- 0
+cite$ -- 6
+duplicate$ -- 66
+empty$ -- 187
+format.name$ -- 62
+if$ -- 561
+int.to.chr$ -- 0
+int.to.str$ -- 6
+missing$ -- 6
+newline$ -- 39
+num.names$ -- 12
+pop$ -- 31
+preamble$ -- 1
+purify$ -- 43
+quote$ -- 0
+skip$ -- 43
+stack$ -- 0
+substring$ -- 251
+swap$ -- 6
+text.length$ -- 0
+text.prefix$ -- 0
+top$ -- 0
+type$ -- 24
+warning$ -- 0
+while$ -- 23
+width$ -- 7
+write$ -- 80

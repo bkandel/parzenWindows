@@ -1,0 +1,32 @@
+\documentclass[10pt,a4paper, journal]{IEEEtran}
+\usepackage[latin1]{inputenc}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage{array}
+\usepackage{booktabs}
+\usepackage{url}
+\pagenumbering{arabic}
+\usepackage{hyperref}
+\author{Ben Kandel \and Pengfei Zheng \and Brian Avants
+\thanks{The authors are with the Penn Image Computing and Science Laboratory.}}
+\title{Distance Metrics for DTI Tract Segmentation}
+
+\begin{document}
+\maketitle
+\begin{abstract}
+Diffusion tensor imaging (DTI) is a relatively recent development in MRI imaging that quantitatively describes the diffusion of water within neuronal tracts and thereby enables visualization and analysis of white matter tracts in the brain.  Although much work has focused on ``tractography'', or delineating the course and distribution of neuronal fibers within the brain, less research has focused on the direct segmentation of larger white matter tracts.  Direct segmentation of white matter tracts has the potential to provide meaningful anatomic information about the brain without relying on accurate delineation of individual neuronal fibers, which has proven to be challenging for current tractographic techniques.  We report here the development of a software package, DT-Atropos, which extends the recently developed Atropos segmentation software suite to the diffusion-tensor regime.  We also evaluate a variety of multivariate methods for diffusion tensor segmentation and report our results. 
+\end{abstract}
+
+\section{Introduction}
+Diffusion tensor imaging is a recently developed modality of MRI that enables analysis of the connections between white matter.  The additional structural information yielded by connectivity studies has proven fruitful in a variety of studies, enabling detection of white matter malformation and damage significantly earlier than conventional MRI \cite{le_bihan_diffusion_2001}.  DTI has been utilized in the study of a wide variety of psychological and neurological disease processes, highlighting its promise as a powerful clinical imaging modality \cite{thomason_diffusion_2011}.
+
+The large amount of data acquired in DTI necessitates computer-aided analysis of the resulting images, and significant effort has been devoted to developing computational techniques to convert the raw DTI tensors into anatomically meaningful representations.  Much of the effort in DTI image analysis has focused on tractography, the tracking of individual neuronal fibers throughout the brain.  Although tractography has yielded significant results, a single voxel that contains a significant amount of noise or a spurious principal direction can introduce errors in fiber tracing that propagate along the fiber \cite{chung_principles_2011,yamada_diffusion_2009}.  The smoothness constraints in fiber tractography make delineation of highly curved fiber bundles inherently problematic (source???). In addition, fiber tracking is sensitive to the placement of the initial seed ROI.  Surgical studies have reported mixed results when utilizing tractography in surgical planning.  While some surgical studies have emphasized the utility of tractography in surgical planning \cite{coenen_intraoperative_2003}, others have emphasized the limitations of tractography in accurately quantifying the size of a motor fiber bundle \cite{kinoshita_fiber-tracking_2005}, essential for precision surgery that aims to remove tumors while preserving motor function. 
+
+Faced with the limitations inherent in fiber-tracking algorithms, several groups have begun to explore DTI segmentation algorithms that act on an entire fiber bundle, free of the limitations and inaccuracies that plague fiber-tracking algorithms.
+
+\bibliographystyle{plain}
+\bibliography{dti_mvseg}
+
+\end{document}
