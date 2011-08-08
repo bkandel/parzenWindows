@@ -9,6 +9,7 @@
 \usepackage{url}
 \pagenumbering{arabic}
 \usepackage{hyperref}
+\usepackage{asymptote}
 \author{Ben Kandel \and Pengfei Zheng \and Brian Avants
 \thanks{The authors are with the Penn Image Computing and Science Laboratory.}}
 \title{Distance Metrics for DTI Tract Segmentation}
@@ -24,7 +25,33 @@ Diffusion tensor imaging is a recently developed modality of MRI that enables an
 
 The large amount of data acquired in DTI necessitates computer-aided analysis of the resulting images, and significant effort has been devoted to developing computational techniques to convert the raw DTI tensors into anatomically meaningful representations.  Much of the effort in DTI image analysis has focused on tractography, the tracking of individual neuronal fibers throughout the brain.  Although tractography has yielded significant results, a single voxel that contains a significant amount of noise or a spurious principal direction can introduce errors in fiber tracing that propagate along the fiber \cite{chung_principles_2011,yamada_diffusion_2009}.  The smoothness constraints in fiber tractography make delineation of highly curved fiber bundles inherently problematic (source???). In addition, fiber tracking is sensitive to the placement of the initial seed ROI.  Surgical studies have reported mixed results when utilizing tractography in surgical planning.  While some surgical studies have emphasized the utility of tractography in surgical planning \cite{coenen_intraoperative_2003}, others have emphasized the limitations of tractography in accurately quantifying the size of a motor fiber bundle \cite{kinoshita_fiber-tracking_2005}, essential for precision surgery that aims to remove tumors while preserving motor function. 
 
-Faced with the limitations inherent in fiber-tracking algorithms, several groups have begun to explore DTI segmentation algorithms that act on an entire fiber bundle, free of the limitations and inaccuracies that plague fiber-tracking algorithms.
+Faced with the limitations inherent in fiber-tracking algorithms, several groups have begun to explore DTI segmentation algorithms that act on an entire fiber bundle, free of the limitations and inaccuracies that plague fiber-tracking algorithms.  Various segmentation algorithms distinguish themselves in two broad areas: The choice of representation of the diffusion tensors and the statistical methods and metrics used to segment the fiber tracts.  We will briefly review recent work done in these two areas and introduce the innovations described in the current work. 
+
+\subsection{Diffusion Tensor Representation}
+Diffusion tensor data is collected as a tensor with six components, corresponding to the diffusion in six directions: $D_{xx}$, $D_{xy}$, $D_{yy}$, $D_{zx}$, $D_{zy}$, $D_{zz}$.  These six components are the lower triangular portion of a symmetric $3 \times 3$ matrix whose components correspond to the amount of diffusion in each direction:
+
+\begin{equation*}
+\bar{D} = \begin{vmatrix}
+D_{xx} & D_{xy} &  D_{xz} \\
+D_{xy} &  D_{yy} &  D_{yz} \\
+D_{xz} & D_{yz} &  D_{zz}
+\end{vmatrix}
+\end{equation*}
+  
+
+DTI matrices can be decomposed into their eigenvalues $\lambda_1, \lambda_2, \lambda_3$ and eigenvectors $e_1, e_2, e_3$ such that $D = \sum_{i = 1}^3 e_i' \lambda_i e_i$.  This decomposition of the DTI tensor actually offers more useful information about the tensor than the raw tensor does itself, because the components of the DTI decomposition have true physical significance.  The eigenvalues of the tensor represent the amount of flow in each of three orthogonal directions, and the eigenvectors represent the direction of the flow.  This representation of the diffusion tensor gives physical meaning to the diffusion tensor and allows useful interpretation of the tensor.  
+
+There are several metrics that can be used to describe the DTI tensors using the additional information provided by the eigendecomposition of the tensors.  One simple metric is the direction of the voxel, given by the principal eigenvector.  The direction is typically described by using spherical coordinates.  We denote the polar angle $\theta$ on the xy plane and the azimuthal angle $\psi$ the angle from the z-axis.  Denoting the three components of the principal eigenvector $\mathbf{e_1}$ $x$, $y$, and $z$, these angles are given by:
+\begin{eqnarray}
+\theta & = & \tan^{-1} \frac{y}{x} \\
+\psi & = & \sin^{-1} z
+\end{eqnarray}
+
+Another group of frequently used metrics are metrics based on the shape of the diffusion tensor.  One of the most widely used metrics is the fractional anisotropy (FA).  This is given by: 
+\begin{equation*}
+\text{FA} = \sqrt{\frac{3}{2}} \frac{\sqrt{(\lambda_1 - \hat{\lambda})^2 + (\lambda_2 - \hat{\lambda})^2 + (\lambda_3 - \hat{\lambda})^2}}{\sqrt{\lambda_1^2 + \lambda_2^2 + \lambda_3^2}}
+\end{equation*}
+when the eigenvalue matrix has trace $\hat{\lambda} = (\lambda_1 + \lambda_2 + \lambda_3)/3$.  Similar metrics include the  linearity of the tensor, given by $\lambda_1 / \sum_i \lambda_i$, or the sphericity of the tensor, given by $3 \times \lambda_3 / \sum_i(\lambda_i)$.  In practice, a simpler shape metric may be used which simply uses the first two eigenvalues of the tensor.  The first two eigenvalues alone contain significant information about the shape of the tensor, and are often used to determine the shape characteristics of a population of tensors.  
 
 \bibliographystyle{plain}
 \bibliography{dti_mvseg}

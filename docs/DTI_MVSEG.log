@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-1.40.10 (TeX Live 2009/Debian) (format=pdflatex 2011.6.22)  1 AUG 2011 12:45
+This is pdfTeX, Version 3.1415926-1.40.10 (TeX Live 2009/Debian) (format=pdflatex 2011.6.22)  1 AUG 2011 14:26
 entering extended mode
  %&-line parsing enabled.
 **DTI_MVSEG.tex
@@ -329,77 +329,116 @@ Package: atbegshi 2008/07/31 v1.9 At begin shipout hook (HO)
 (/usr/share/texmf-texlive/tex/latex/hyperref/hpdftex.def
 File: hpdftex.def 2009/10/09 v6.79a Hyperref driver for pdfTeX
 \Fld@listcount=\count114
+)
+(/usr/share/texmf/tex/latex/asymptote/asymptote.sty
+Package: asymptote 2010/07/10 v1.15 Asymptote style file for LaTeX
+
+(/usr/share/texmf-texlive/tex/latex/base/ifthen.sty
+Package: ifthen 2001/05/26 v1.1c Standard LaTeX ifthen package (DPC)
+)
+(/usr/share/texmf-texlive/tex/latex/graphics/color.sty
+Package: color 2005/11/14 v1.0j Standard LaTeX Color (DPC)
+
+(/etc/texmf/tex/latex/config/color.cfg
+File: color.cfg 2007/01/18 v1.5 color configuration of teTeX/TeXLive
+)
+Package color Info: Driver file: pdftex.def on input line 130.
+)
+\AsyStream=\write3
+\AsyPreStream=\write4
+\AsyTestStream=\read1
+\openout4 = `DTI_MVSEG.pre'.
+
+\ASYbox=\box29
+\c@asy=\count115
 ) (./DTI_MVSEG.aux)
 \openout1 = `DTI_MVSEG.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 16.
-LaTeX Font Info:    ... okay on input line 16.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 16.
-LaTeX Font Info:    ... okay on input line 16.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 16.
-LaTeX Font Info:    ... okay on input line 16.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 16.
-LaTeX Font Info:    ... okay on input line 16.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 16.
-LaTeX Font Info:    ... okay on input line 16.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 16.
-LaTeX Font Info:    ... okay on input line 16.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 16.
-LaTeX Font Info:    ... okay on input line 16.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 17.
+LaTeX Font Info:    ... okay on input line 17.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 17.
+LaTeX Font Info:    ... okay on input line 17.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 17.
+LaTeX Font Info:    ... okay on input line 17.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 17.
+LaTeX Font Info:    ... okay on input line 17.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 17.
+LaTeX Font Info:    ... okay on input line 17.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 17.
+LaTeX Font Info:    ... okay on input line 17.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 17.
+LaTeX Font Info:    ... okay on input line 17.
 
 (/usr/share/texmf-texlive/tex/context/base/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
-\scratchcounter=\count115
+\scratchcounter=\count116
 \scratchdimen=\dimen146
-\scratchbox=\box29
-\nofMPsegments=\count116
-\nofMParguments=\count117
+\scratchbox=\box30
+\nofMPsegments=\count117
+\nofMParguments=\count118
 \everyMPshowfont=\toks25
-\MPscratchCnt=\count118
+\MPscratchCnt=\count119
 \MPscratchDim=\dimen147
-\MPnumerator=\count119
+\MPnumerator=\count120
 \everyMPtoPDFconversion=\toks26
 )
-Package hyperref Info: Link coloring OFF on input line 16.
+Package hyperref Info: Link coloring OFF on input line 17.
  (/usr/share/texmf-texlive/tex/latex/hyperref/nameref.sty
 Package: nameref 2007/05/29 v2.31 Cross-referencing by name of section
 
 (/usr/share/texmf-texlive/tex/latex/oberdiek/refcount.sty
 Package: refcount 2008/08/11 v3.1 Data extraction from references (HO)
 )
-\c@section@level=\count120
+\c@section@level=\count121
 )
-LaTeX Info: Redefining \ref on input line 16.
-LaTeX Info: Redefining \pageref on input line 16.
+LaTeX Info: Redefining \ref on input line 17.
+LaTeX Info: Redefining \pageref on input line 17.
  (./DTI_MVSEG.out)
 (./DTI_MVSEG.out)
-\@outlinefile=\write3
-\openout3 = `DTI_MVSEG.out'.
+\@outlinefile=\write5
+\openout5 = `DTI_MVSEG.out'.
 
-\AtBeginShipoutBox=\box30
+\AtBeginShipoutBox=\box31
 
 ** WARNING: \and is valid only when in conference or peerreviewca
-modes (line 18).
-(./DTI_MVSEG.bbl) [1{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}
+modes (line 19).
+LaTeX Font Info:    Try loading font information for U+msa on input line 31.
+(/usr/share/texmf-texlive/tex/latex/amsfonts/umsa.fd
+File: umsa.fd 2009/06/22 v3.00 AMS symbols A
+)
+LaTeX Font Info:    Try loading font information for U+msb on input line 31.
+
+(/usr/share/texmf-texlive/tex/latex/amsfonts/umsb.fd
+File: umsb.fd 2009/06/22 v3.00 AMS symbols B
+) [1{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}
 
 
-]
-(./DTI_MVSEG.aux) ) 
+] (./DTI_MVSEG.bbl) [2
+
+] (./DTI_MVSEG.aux) ) 
 Here is how much of TeX's memory you used:
- 5782 strings out of 495061
- 84825 string characters out of 1182621
- 162930 words of memory out of 3000000
- 8880 multiletter control sequences out of 15000+50000
- 34085 words of font info for 63 fonts, out of 3000000 for 9000
+ 5991 strings out of 495061
+ 87690 string characters out of 1182621
+ 173332 words of memory out of 3000000
+ 9057 multiletter control sequences out of 15000+50000
+ 37847 words of font info for 75 fonts, out of 3000000 for 9000
  28 hyphenation exceptions out of 8191
- 38i,5n,36p,1398b,288s stack positions out of 5000i,500n,10000p,200000b,50000s
-{/usr/share/texmf-texlive/fonts/enc/dvips/base/8r.enc}</usr/
-share/texmf-texlive/fonts/type1/urw/times/utmb8a.pfb></usr/share/texmf-texlive/
-fonts/type1/urw/times/utmbi8a.pfb></usr/share/texmf-texlive/fonts/type1/urw/tim
-es/utmr8a.pfb></usr/share/texmf-texlive/fonts/type1/urw/times/utmri8a.pfb>
-Output written on DTI_MVSEG.pdf (1 page, 60961 bytes).
+ 38i,7n,36p,1398b,289s stack positions out of 5000i,500n,10000p,200000b,50000s
+{/usr/share/texmf-texlive/fonts/enc/dvips/base/8r.enc}</us
+r/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmbx10.pfb></usr/share/tex
+mf-texlive/fonts/type1/public/amsfonts/cm/cmbx7.pfb></usr/share/texmf-texlive/f
+onts/type1/public/amsfonts/cm/cmex10.pfb></usr/share/texmf-texlive/fonts/type1/
+public/amsfonts/cm/cmmi10.pfb></usr/share/texmf-texlive/fonts/type1/public/amsf
+onts/cm/cmmi7.pfb></usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmr1
+0.pfb></usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/s
+hare/texmf-texlive/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texmf-
+texlive/fonts/type1/public/amsfonts/cm/cmsy7.pfb></usr/share/texmf-texlive/font
+s/type1/urw/times/utmb8a.pfb></usr/share/texmf-texlive/fonts/type1/urw/times/ut
+mbi8a.pfb></usr/share/texmf-texlive/fonts/type1/urw/times/utmr8a.pfb></usr/shar
+e/texmf-texlive/fonts/type1/urw/times/utmri8a.pfb>
+Output written on DTI_MVSEG.pdf (2 pages, 143767 bytes).
 PDF statistics:
- 51 PDF objects out of 1000 (max. 8388607)
- 10 named destinations out of 1000 (max. 500000)
- 17 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 97 PDF objects out of 1000 (max. 8388607)
+ 13 named destinations out of 1000 (max. 500000)
+ 25 words of extra memory for PDF output out of 10000 (max. 10000000)
 
