@@ -70,7 +70,7 @@ for DT in ${KIRBY_DT}; do
     for x in 0 1 2 3 4 5 ; do   
         ${ANTSPATH}ImageMath 3 v${x}.nii.gz ExtractVectorComponent $DT $x 
     done
-    ${ANTSPATH}Atropos -d 3 -i PriorProbabilityImages[$num_tracts,tract_prob_subj_${i}_%d.nii.gz,0.5] -x ${FA_MASK} -o [${Out}_non.nii.gz,${Out}_non_oprob%02d.nii.gz] $IMGS -c [5,0]  -p Socrates[1] -m [0.2,1x1x1]  -k jointshapeandorientationprobability[2,32]  
+    ${ANTSPATH}Atropos -d 3 -i PriorProbabilityImages[$num_tracts,tract_prob_subj_${i}_%d.nii.gz,0.5] -x ${FA_MASK} -o [${Out}_non.nii.gz,${Out}_non_oprob%02d.nii.gz] $IMGS -c [5,0]  -p Socrates[1] -m [0.2,1x1x1]  -k jointshapeandorientationprobability[2,20]  
     for x in 0 1 2 3 4 5 ; do   
         ${ANTSPATH}ImageMath 3 v${x}.nii.gz ExtractVectorComponent $DT $x 
         ${ANTSPATH}MultiplyImages 3  v${x}.nii.gz 1.e5    v${x}.nii.gz # for mahalanobis
@@ -87,10 +87,15 @@ wait
   
   
 ~/ANTS/Scripts/antsaffine.sh 3 kirby_fa_1.nii.gz kirby_fa_2.nii.gz kirby2tokirby1affine
-for i in 1 2 3 4 5 6 7 8 9 10; do
-    ${ANTSPATH}WarpImageMultiTransform 3 tract_prob_subj_2_${i}.nii.gz tract_prob_subj_2_${i}_warped.nii.gz -R kirby_fa_1.nii.gz kirby2tokirby1affinedeformed.nii.gz kirby2tokirby1affineAffine.txt 
-    ${ANTSPATH}ImageMath 3 output_${i} DiceAndMinDistSum  tract_prob_subj_1_${i}.nii.gz tract_prob_subj_2_${i}_warped.nii.gz  Distance_${i}.nii.gz 
+for i in 01 02 03 04 05 06 07 08 09 10; do
+    ${ANTSPATH}WarpImageMultiTransform 3 kirby_2_imgs/out_mah_oprob${i}.nii.gz kirby_2_imgs/out_mah_oprob${i}_warped.nii.gz -R kirby_fa_1.nii.gz kirby2tokirby1affinedeformed.nii.gz kirby2tokirby1affineAffine.txt 
+    ${ANTSPATH}ThresholdImage 3  kirby_2_imgs/out_mah_oprob${i}_warped.nii.gz kirby_2_imgs/out_mah_oprob${i}_warped_thresh.nii.gz  0.25  999
+    ${ANTSPATH}ImageMath 3 output_mah_${i} DiceAndMinDistSum  kirby_2_imgs/out_mah_oprob${i}_warped_thresh.nii.gz kirby_1_imgs/out_mah_oprob${i}.nii.gz Distance_mah_${i}.nii.gz &
 done
 
 
-
+for i in 01 02 03 04 05 06 07 08 09 10; do
+    ${ANTSPATH}WarpImageMultiTransform 3 kirby_2_imgs/out_non_oprob${i}.nii.gz kirby_2_imgs/out_non_oprob${i}_warped.nii.gz -R kirby_fa_1.nii.gz kirby2tokirby1affinedeformed.nii.gz kirby2tokirby1affineAffine.txt 
+    ${ANTSPATH}ThresholdImage 3  kirby_2_imgs/out_non_oprob${i}_warped.nii.gz kirby_2_imgs/out_non_oprob${i}_warped_thresh.nii.gz  0.25  999
+    ${ANTSPATH}ImageMath 3 output_non_${i} DiceAndMinDistSum  kirby_2_imgs/out_non_oprob${i}_warped_thresh.nii.gz kirby_1_imgs/out_non_oprob${i}.nii.gz Distance_non_${i}.nii.gz &
+done
